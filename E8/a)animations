@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: Animation()));
+
+class Animation extends StatefulWidget {
+  @override
+  State<Animation> createState() => _AnimationState();
+}
+
+class _AnimationState extends State<Animation> {
+  bool big = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Beginner Animation')),
+      body: Center(
+        child: GestureDetector(
+          onTap: () => setState(() => big = !big),
+          child: AnimatedContainer(
+            duration: Duration(seconds: 1),
+            width: big ? 250 : 100,
+            height: big ? 500 : 100,
+            color: big ? Colors.purple : Colors.blue,
+            alignment: Alignment.center,
+            child: Text('Box',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ),
+      ),
+    );
+  }
+}
