@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: RatingPage()));
+
+class RatingPage extends StatefulWidget {
+  @override
+  State<RatingPage> createState() => _RatingPageState();
+}
+
+class _RatingPageState extends State<RatingPage> {
+  int rating = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Rating App')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Stateless Widget'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(5, (_) =>
+                Icon(Icons.star, color: Colors.yellow, size: 40)),
+            ),
+
+            SizedBox(height: 30),
+            Text('Stateful Widget'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(5, (i) =>
+                IconButton(
+                  onPressed: () => setState(() => rating = i + 1),
+                  icon: Icon(
+                    rating > i ? Icons.star : Icons.star_border,
+                    color: Colors.yellow,
+                    size: 40,
+                  ),
+                )),
+            ),
+
+            Text('Rating: $rating / 5'),
+          ],
+        ),
+      ),
+    );
+  }
+}
