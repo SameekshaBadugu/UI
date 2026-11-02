@@ -1,0 +1,22 @@
+Download flutter SDK, Extract it and verify installation.
+1. Install dart SDK - sudo apt update
+2. sudo apt install -y curl git unzip xz-utils zip libglu1-mesa
+3. cd ~
+  curl -LO https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.19.0-stable.tar.xz
+4. tar xf flutter_linux_*-stable.tar.xz  
+5. nano ~/.bashrc
+6. export PATH=&quot;$PATH:$HOME/flutter/bin&quot;
+7. source ~/.bashrc
+8. flutter doctor
+  Open VS Code -> Extentions -> Install Flutter(by Dart Code) and restart VS code after installation
+9. sudo snap install android-studio –classic
+   Open Android Studio → Settings → Search SDK Manager → SDK Platforms → Select Android 16.0 (Baklava) API 36 → SDK Tools → Select Android SDK Build-Tools, Command-line Tools, Android Emulator, and Platform-Tools → Click OK → Accept Licenses → Finish.
+10. Install chrome
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo dpkg -i google-chrome-stable_current_amd64.deb
+  google-chrome
+11. sudo apt update
+  sudo apt install clang cmake ninja-build pkg-config libgtk-3-dev
+12. flutter doctor --android-licenses
+13. install flutter and dart plugins in android studio
+  set sdk path in android studio---home/flutter/bin/cache/dart-sdk
