@@ -1,0 +1,57 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+void main() => runApp(MaterialApp(home: Posts()));
+
+class Posts extends StatelessWidget {
+  Future<List> getData() async {
+    var r = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+    );
+
+    if (r.statusCode == 200) return jsonDecode(r.body);
+    throw Exception('Failed to load');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Fetched Data')),
+      body: FutureBuilder<List>(
+        future: getData(),
+        builder: (_, s) {
+          if (s.connectionState == ConnectionState.waiting)
+            return Center(child: CircularProgressIndicator());
+
+          if (s.hasError)
+            return Center(child: Text('Error'));
+
+          if (!s.hasData || s.data!.isEmpty)
+            return Center(child: Text('No data available'));
+
+          return ListView.separated(
+            itemCount: s.data!.length,
+            separatorBuilder: (_, __) => Divider(),
+            itemBuilder: (_, i) => Padding(
+              padding: EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    s.data![i]['title'],
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(s.data![i]['body']),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
