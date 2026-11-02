@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool dark = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: dark
+          ? ThemeData.dark()
+          : ThemeData.light().copyWith(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.redAccent,
+              ),
+            ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(dark ? 'Dark Theme' : 'Light Theme'),
+        ),
+        body: Column(
+          children: [
+            OutlinedButton.icon(
+              onPressed: () {},
+              icon: Icon(dark
+                  ? Icons.dark_mode
+                  : Icons.light_mode),
+              label: Text('Button'),
+            ),
+            SizedBox(height: 20),
+            SwitchListTile(
+              title: Text('Dark Theme'),
+              value: dark,
+              onChanged: (v) => setState(() => dark = v),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
