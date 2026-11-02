@@ -1,0 +1,49 @@
+flutter pub add provider
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+void main() => runApp(
+  ChangeNotifierProvider(
+    create: (_) => CounterModel(),
+    child: MaterialApp(home: CounterPage()),
+  ),
+);
+
+class CounterModel extends ChangeNotifier {
+  int count = 0;
+
+  void increment() {
+    count++;
+    notifyListeners();
+  }
+}
+
+class CounterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Counter App')),
+      body: Center(
+        child: Consumer<CounterModel>(
+          builder: (_, model, __) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('You have pushed the button this many times:'),
+              SizedBox(height: 20),
+              Text(
+                '${model.count}',
+                style: TextStyle(fontSize: 40,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () =>
+            Provider.of<CounterModel>(context, listen: false).increment(),
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
