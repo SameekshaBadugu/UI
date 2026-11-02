@@ -1,0 +1,44 @@
+flutter pub add http
+
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+void main() => runApp(MaterialApp(home: Users()));
+
+class Users extends StatefulWidget {
+  @override
+  State<Users> createState() => _UsersState();
+}
+
+class _UsersState extends State<Users> {
+  List data = [];
+
+  void getData() async {
+    var r = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/users'),
+    );
+    if (r.statusCode == 200)
+      setState(() => data = jsonDecode(r.body));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Users')),
+      body: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (_, i) => ListTile(
+          title: Text(data[i]['name']),
+          subtitle: Text(data[i]['email']),
+        ),
+      ),
+    );
+  }
+}
