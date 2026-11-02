@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+void main() => runApp(MaterialApp(
+  home: Scaffold(
+    appBar: AppBar(title: Text('Registration Form')),
+    body: Column(
+      children: [
+        TextFormField(decoration: InputDecoration(labelText: 'First Name')),
+        TextFormField(decoration: InputDecoration(labelText: 'Last Name')),
+        TextFormField(
+          decoration: InputDecoration(
+            labelText: 'Email',
+            suffixText: '@bvrithyderabad.ac.in',
+          ),
+        ),
+        TextFormField(
+          keyboardType: TextInputType.phone,
+          inputFormatters: [LengthLimitingTextInputFormatter(10)],
+          decoration: InputDecoration(
+            labelText: 'Phone Number',
+            prefixText: '+91',
+          ),
+        ),
+        Divider(),
+        TextFormField(decoration: InputDecoration(labelText: 'Username')),
+        TextFormField(
+          obscureText: true,
+          decoration: InputDecoration(labelText: 'Password'),
+        ),
+        TextFormField(
+          obscureText: true,
+          decoration: InputDecoration(labelText: 'Confirm Password'),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          child: Text('Register'),
+        ),
+      ],
+    ),
+  ),
+));
